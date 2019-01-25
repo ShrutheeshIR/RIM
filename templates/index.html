@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    <title>CHOMU MIRROR</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style type="text/css" media="print">
+  body{
+    margin:0;
+    overflow: hidden;
+  }
+  .wrapper{
+    transform: rotate(90deg);
+    transform-origin: bottom left;
+
+    position: absolute;
+    top: -100vw;
+    left:0;
+
+    height: 100vw;
+    width:100vw;
+    overflow: auto;
+  }
+
+
+
+  </style>
+  </head>
+
+  <body style="background-color:black">
+  <div class="wrapper"> 
+
+        
+
+      
+
+
+            
+
+
+    <div class="container-fluid" style="margin: 0% ; width: 100%; padding-right:0;padding-left:0;margin-right:auto;margin-left:auto; ">
+
+        <div class="row ">
+              <div class="card" style="background-color: black;color: white;text-align: center;margin: 0%;width:33%">
+                  <div class="card-body ">
+                    <br>
+                    <br>
+                    <h1 styles="color:white"><img src="{{dic2['icon']}}" alt="logo"/>WEATHER</h1> 
+                    <p class="card-text">{{dic2['temp']['temp']}} °C</p>
+                    <p class="card-text">{{dic2['wind']['speed']}} Km/hr</p>
+                    <p class="card-text">{{dic2['humidity']}} %</p>
+
+                    {% if dic2['rain'] | length == 1 %}
+                    <p class="card-text">{{dic2['rain']}}mm</p>
+                    {%endif %}
+                    <p class="card-text">{{dic2['clouds']}} %</p>
+                    
+                    
+                  </div>
+                </div>
+                <div class="card" style="background-color: black;color: white;text-align: center;width:33%">
+                    <div class="card-body">
+                      <p class="card-text" style="font-size:150%">{{dict['date']}}</p>
+                      <p class="card-text"  style="font-size:100%">{{dict['time']}}</p>
+                      
+                    </div>
+                  </div>
+
+                  <div class="card" style="background-color: black;color: white;width: 33%; text-align: justify;list-style-type: none">
+                      <div class="mySlides">
+                        <br>
+                        <br>
+                        <h1>NEWS</h1>
+
+                              {% for i in dic3 %}
+
+                            {{i['title']}}
+                            <br>
+                            <br>
+
+                            {% endfor %}
+                      
+                        </div>
+                        <div class="mySlides">
+                          <br>
+                          <br>
+                            <h1>MAIL</h1>
+                            {% for i in dic6 %}
+    
+                                {{i['name']}} 
+                                {{i['subject']}}
+                                <br>
+                                <br>
+              
+                            {% endfor %}
+
+                        </div>
+                </div>
+      </div>
+        </div>
+        <script>
+            var slideIndex = 0;
+            carousel();
+            
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                  x[i].style.display = "none"; 
+                }
+                slideIndex++;
+                if (slideIndex > x.length) {slideIndex = 1} 
+                x[slideIndex-1].style.display = "block"; 
+                setTimeout(carousel, 10000); 
+            }
+            </script>
+            
+
+
+ 
+
+
+          </div>
+  </body>
+  </html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="stuff, to, help, search, engines, not" name="keywords">
+<meta content="What this page is about." name="description">
+<meta content="Display Webcam Stream" name="title">
+<meta http-equiv="refresh" content="100" >
+
+<title>Display Webcam Stream</title>
+<link rel="stylesheet" href="/static/bootstrap.min.css">
+
+<style>
+
+p{
+  font-weight:bold;
+  font-style: italic;
+
+}
+.video-container {
+  position: relative;
+}
+video {
+  height: auto;
+  vertical-align: middle;
+  width: 100%;
+}
+.overlay-desc {
+  background: rgba(0,0,0,0);
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+</style>
+</head>
+
+<body>
+
+  <div class="video-container">
+  	  <video autoplay="true" id="videoElement">
+  		</video>
+       <div class="overlay-desc">
+
+
+
+          <div class="card border-0 float-left" style="color: white;  text-align: left;margin: 0%;width:33%; background: rgba(0,0,0,0) ">
+              <div class="card-body">
+                <br>
+                <br>
+                <h1 style="color:white"><img src="{{dic2['icon']}}" alt="logo"/>WEATHER</h1>
+                <br>
+                <p class="card-text">T: {{dic2['temp']['temp']}} °C</p><br>
+                <p class="card-text">WS: {{dic2['wind']['speed']}} Km/hr</p><br>
+                <p class="card-text">H: {{dic2['humidity']}} %</p><br>
+ 
+                {% if dic2['rain'] | length == 1 %}
+                <p class="card-text">R: {{dic2['rain']}}mm</p>
+                {%endif %}
+                <p class="card-text">C: {{dic2['clouds']}} %</p>
+ 
+ 
+              </div>
+            </div>
+
+
+
+
+            <div class="card border-0" style="color: white; text-align: center;width:33%;font-size: 16px; background: rgba(0,0,0,0) ">
+                <div class="card-body">
+                  <p class="card-text" style="font-size:150%; color: white">{{dict['date']}}</p>
+                  <p class="card-text"  style="font-size:100%">{{dict['time']}}</p>
+   
+                </div>
+              </div>
+
+
+
+
+
+
+            <div class="card border-0" style="color: white;text-align: right;width:33%;font-size: 16px; background: rgba(0,0,0,0) ">
+                <div class="card-body">
+                    <div class="mySlides">
+                        <br>
+                        <br>
+                        <h1>NEWS</h1>
+                        <p>
+                              {% for i in dic3 %}
+
+                            {{i['title']}}
+                            <br>
+                            <br>
+
+                            {% endfor %}
+                          </p>
+                        </div>
+                    <div class="mySlides">
+                        <br>
+                        <br>
+                          <h1>MAIL</h1>
+                        <p>
+                          {% for i in dic6 %}
+  
+                              {{i['Sender']}} 
+                              {{i['Subject']}}
+                              <br>
+                              <br>
+            
+                          {% endfor %}
+                        </p>
+                      </div>
+
+                  
+                </div>
+              </div>
+
+
+
+       </div>
+  	</div>
+    <script>
+
+      var fkxn = function (name) {
+
+      var img = document.querySelector('img') || document.createElement('img');
+      var context;
+      var width = video.offsetWidth
+        , height = video.offsetHeight;
+
+      canvas = canvas || document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, width, height);
+
+      img.src = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+      //img.src = canvas.toDataURL('image.png');
+      document.body.appendChild(img);
+    }
+
+
+    var video = document.querySelector("video");
+    var canvas = document.querySelector('canvas');
+
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({video: true})
+      .then(function(stream) {
+        
+
+        video.srcObject = stream;
+        console.log("YBYKB12312423GKJB");  
+          fkxn("Hello")
+
+      })
+
+      .catch(function(err0r) {
+        console.log("Something went wrong!");
+      });
+
+     
+    
+    }
+
+var slideIndex = 0;
+            carousel();
+            
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                  x[i].style.display = "none"; 
+                }
+                slideIndex++;
+                if (slideIndex > x.length) {slideIndex = 1} 
+                x[slideIndex-1].style.display = "block"; 
+                setTimeout(carousel, 10000); 
+            }
+
+    </script>
+
+
+
+</body>
+</html>
